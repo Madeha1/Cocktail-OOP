@@ -5,9 +5,9 @@ public class Cups implements GetInfo {
    private  int capacity;
     private int calory;
 
-    public Cups(int capacity, int calory) {
+    public Cups(int capacity) {
         this.capacity = capacity;
-        this.calory = calory;
+      
     }
 
     public Cups() {

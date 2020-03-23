@@ -2,8 +2,8 @@ package cocktail;
 
 public class Sugar extends Ingredients {
 
-    public Sugar(String name, int calory, Color color) {
-        super(name, calory, color);
+    public Sugar(int volume ,String name, int calory, Color color) {
+        super(volume , name , calory, new Color(0 , 0,0));
     }
  
 

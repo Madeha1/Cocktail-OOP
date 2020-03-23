@@ -5,7 +5,7 @@ public class Fruits extends Ingredients{
        private int volume;
 
     public Fruits(int volume, String name, int calory, Color color) {
-        super(name, calory, color);
+        super(volume ,name, calory, color);
         this.volume = volume;
     }
     
@@ -33,3 +33,9 @@ public class Fruits extends Ingredients{
     }
     
 }
+
+        
+    
+    
+
+    

@@ -1,28 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cocktail;
 
-/**
- *
- * @author lana-pc
- */
 public class Ingredients  implements GetInfo {
     private String name;
     private int calory;
      Color color;
-
+ private int volume;
      
       public Ingredients (){}
       
-    public Ingredients(String name, int calory, Color color) {
+    public Ingredients(int volume ,String name ,  int calory, Color color) {
         this.name = name;
+        this.volume = volume;
         this.calory = calory;
         this.color = color;
     }
 
+     public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
 
     public String getName() {
         return name;
@@ -38,6 +37,14 @@ public class Ingredients  implements GetInfo {
 
     public void setCalory(int calory) {
         this.calory = calory;
+    }
+    
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override
