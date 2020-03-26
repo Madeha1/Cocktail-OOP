@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="cocktail">
+  <ClassDiagramComponents>
+    <Class name="Blender" package="cocktail" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="capacity" type="int" visibility="private"/>
+        <Field name="volume" type="int" visibility="private"/>
+        <Field name="ingredient" type="Ingredients" visibility="package"/>
+        <Field name="cup" type="Cups" visibility="package"/>
+        <Field name="color" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="capacity"/>
+          <Argument type="int" name="volume"/>
+          <Argument type="Ingredients" name="ingredient"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getCapacity" returnType="int" visibility="public"/>
+        <Method name="setCapacity" returnType="void" visibility="public">
+          <Argument type="int" name="capacity"/>
+        </Method>
+        <Method name="getVolume" returnType="int" visibility="public"/>
+        <Method name="setVolume" returnType="void" visibility="public">
+          <Argument type="int" name="volume"/>
+        </Method>
+        <Method name="getIngredient" returnType="Ingredients" visibility="public"/>
+        <Method name="setIngredient" returnType="void" visibility="public">
+          <Argument type="Ingredients" name="ingredient"/>
+        </Method>
+        <Method name="add" returnType="void" visibility="public">
+          <Argument type="Ingredients" name="ingredient"/>
+        </Method>
+        <Method name="blend" returnType="void" visibility="public"/>
+        <Method name="pour" returnType="void" visibility="public">
+          <Argument type="Cups" name="cup"/>
+        </Method>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Cocktail" package="cocktail" visibility="public" xPosition="353.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Color" package="cocktail" visibility="public" xPosition="813.0" yPosition="55.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Cups" package="cocktail" visibility="public" xPosition="40.0" yPosition="522.0">
+      <Fields>
+        <Field name="capacity" type="int" visibility="private"/>
+        <Field name="calory" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="capacity"/>
+          <Argument type="int" name="calory"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getCapacity" returnType="int" visibility="public"/>
+        <Method name="setCapacity" returnType="void" visibility="public">
+          <Argument type="int" name="capacity"/>
+        </Method>
+        <Method name="getCalory" returnType="int" visibility="public"/>
+        <Method name="setCalory" returnType="void" visibility="public">
+          <Argument type="int" name="calory"/>
+        </Method>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Fruits" package="cocktail" visibility="public" xPosition="467.0" yPosition="903.0">
+      <Fields>
+        <Field name="volume" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="volume"/>
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="calory"/>
+          <Argument type="Color" name="color"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getVolume" returnType="int" visibility="public"/>
+        <Method name="setVolume" returnType="void" visibility="public">
+          <Argument type="int" name="volume"/>
+        </Method>
+        <Method name="getColor" returnType="Color" visibility="public"/>
+        <Method name="setColor" returnType="void" visibility="public">
+          <Argument type="Color" name="color"/>
+        </Method>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Ingredients" package="cocktail" visibility="public" xPosition="498.0" yPosition="450.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="calory" type="int" visibility="private"/>
+        <Field name="color" type="Color" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="calory"/>
+          <Argument type="Color" name="color"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getCalory" returnType="int" visibility="public"/>
+        <Method name="setCalory" returnType="void" visibility="public">
+          <Argument type="int" name="calory"/>
+        </Method>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Milk" package="cocktail" visibility="public" xPosition="831.0" yPosition="903.0">
+      <Fields>
+        <Field name="volume" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="volume"/>
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="calory"/>
+          <Argument type="Color" name="color"/>
+        </Constructor>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getVolume" returnType="int" visibility="public"/>
+        <Method name="setVolume" returnType="void" visibility="public">
+          <Argument type="int" name="volume"/>
+        </Method>
+        <Method name="getColor" returnType="Color" visibility="public"/>
+        <Method name="setColor" returnType="void" visibility="public">
+          <Argument type="Color" name="color"/>
+        </Method>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Sugar" package="cocktail" visibility="public" xPosition="158.0" yPosition="903.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="calory"/>
+          <Argument type="Color" name="color"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getInfo" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="GetInfo" package="cocktail" visibility="public" xPosition="498.0" yPosition="233.0">
+      <Methods>
+        <Method name="getInfo" returnType="String" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="cocktail.Sugar" target="cocktail.Ingredients"/>
+    <HasRelation name="color" source="cocktail.Blender" target="cocktail.Color" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="cocktail.Ingredients" target="cocktail.GetInfo"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="cocktail.Color" target="cocktail.GetInfo"/>
+    <HasRelation name="ingredients" source="cocktail.Blender" target="cocktail.Ingredients" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="cup" source="cocktail.Blender" target="cocktail.Cups" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="cocktail.Fruits" target="cocktail.Ingredients"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="cocktail.Blender" target="cocktail.GetInfo"/>
+    <IsRelation name="is" source="cocktail.Milk" target="cocktail.Ingredients"/>
+    <HasRelation name="color" source="cocktail.Ingredients" target="cocktail.Color" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
