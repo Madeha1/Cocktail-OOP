@@ -1,10 +1,13 @@
 package cocktail;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Blender implements GetInfo {
      
-    private int capacity;
+    private final int capacity;
     private int volume;
-    Ingredients ingredient[] = new Ingredients[5]; //3 fruits + milk + suger = 5;
+    ArrayList<Ingredients> ingredients;
     Cups cup ;
     Color color ;
     int calory;
@@ -14,6 +17,7 @@ public class Blender implements GetInfo {
         this.volume = 0;
         this.color = new Color(0 , 0 , 0);
         this.calory = 0;
+         ingredients = new ArrayList<>();
     }
 
     
@@ -30,72 +34,100 @@ public class Blender implements GetInfo {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-    //?! what should I return ?!
-    public Ingredients getIngredient() {
-            return ingredient[0];
-
-    }
+   
 
     public Color getColor() {
         return color;
     }
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    
+public ArrayList<Ingredients> getIngredients() {
+        return ingredients;
+    }
 
+    public void setIngredients(ArrayList<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Cups getCup() {
+        return cup;
+    }
+
+    public void setCup(Cups cup) {
+        this.cup = cup;
+    }
     public int getCalory() {
         return calory;
     }
 
-    //boolean because I want to Check if I added the ingrediants without errors
+    public void setCalory(int calory) {
+        this.calory = calory;
+    }
+
 
     
-    public boolean add(Ingredients ingredient[])
-    {
-        for (Ingredients ing : ingredient)
+    public void add(Ingredients ingredients)
+    {         
+        if (this.volume + ingredients.getVolume() > capacity)
         {
-            volume += ing.getVolume();
+         this.volume+= ingredients.getVolume();
+        this.ingredients.add(ingredients);
         }
-        if (volume > capacity) {
-            System.out.println("The total Volume for the ingredient is larger than the capacity of the blinder (2L) re-enter the ingredients");
-            return false;
-        }
-        else
-            return true;
     }
-public void blend() {
-        for (Ingredients ing : ingredient) {
-            this.color.setR(color.getR() + ing.getColor().getR());
-            this.color.setG(color.getG() + ing.getColor().getG());
-            this.color.setB(color.getB() + ing.getColor().getB());
-            calory += ing.getCalory();
+    public void blend() {
+       int totalRed = 0 , totalBlue = 0 , totalGreen = 0;
+        for (Ingredients ing : ingredients) {
+            totalRed +=  ing.getColor().getR();
+            totalGreen += ing.getColor().getG();
+            totalBlue += ing.getColor().getB();
+            calory += ing.getCalories();
         }   
-        calory /=5;
-        color.setR(color.getR() / 5);
-        color.setG(color.getG() / 5);
-        color.setB(color.getB() / 5);
-    
+        calory /=ingredients.size();
+        color.setR(totalRed /ingredients.size() );
+        color.setG(totalGreen / ingredients.size());
+        color.setB(totalBlue / ingredients.size());
     }
+    
+
     public void pour(Cups cup)
     {
 if (this.volume == 0)
             System.out.println("The blinder is empty");
      else if (this.volume < cup.getCapacity())
      {
-         cup.setCalory(calory);
+         cup.setCalories(calory);
          this.volume = 0;
          this.calory = 0;
+       ingredients.clear();
      }   
      else 
      {
+        cup.setCalories(calory * cup.getCapacity() / this.volume);
+         this.calory -= (this.calory - cup.getCalories());
          this.volume -= cup.getCapacity();
-         cup.setCalory(calory / cup.getCapacity());
-         this.calory -= (calory / cup.getCapacity());
 
      }
     }
-//calory , what contains , color.
+
+    public String contains ()
+    {
+        HashSet<String> component = new HashSet<>();
+        for (Ingredients ing : ingredients)
+        {
+            component.add(ing.getName());
+        }
+        String str = "The ingredients used in the cocktail :";
+        for (int i= 0 ; i< component.size() ;i++)
+        str+= " "+component;
+        
+        return str;
+    }
 
     @Override
     public String getInfo()
     {
-        return this.capacity + " " + this.volume + " "+ this.ingredient;
+ return "The capacity of the blender(gm):"+this.capacity + "\nThe volume of the blender contents(gm) :" +this.volume +"\nThe calories in the cocktail is : "+this.calory;
     }
 }

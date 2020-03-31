@@ -40,7 +40,7 @@ public class Color implements GetInfo{
     @Override
     public String getInfo()
     {
-        return "";
+         return "the rgb color is : "+ this.R +","+this.G+","+this.B+"\n";
     }
     
 }
