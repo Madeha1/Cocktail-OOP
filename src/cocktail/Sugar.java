@@ -2,7 +2,7 @@ package cocktail;
 
 public class Sugar extends Ingredients {
 
-    private final int volume;
+   private final int volume;
     private final Color color;
     
     public Sugar(int calories){
@@ -20,7 +20,7 @@ public class Sugar extends Ingredients {
      @Override
     public int getVolume ()
     {
-        return 0;
+        return volume;
     }
     @Override
     public String getInfo()

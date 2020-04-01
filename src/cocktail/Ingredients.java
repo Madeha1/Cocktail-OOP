@@ -1,14 +1,15 @@
 package cocktail;
 
 public abstract  class Ingredients  implements GetInfo {
-    private String name;
+   private String name;
+
     private int calories;
 
-     public Ingredients(String name, int calories) {
+    public Ingredients(String name, int calories) {
         this.name = name;
         this.calories = calories;  
     }
-     
+
     public String getName() {
         return this.name;
     }
@@ -25,7 +26,10 @@ public abstract  class Ingredients  implements GetInfo {
         this.calories = calories;
     }
     public abstract int getVolume();
+
+
     public abstract Color getColor();
+    
     @Override
     public String getInfo()
     {

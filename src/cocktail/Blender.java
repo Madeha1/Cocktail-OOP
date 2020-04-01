@@ -1,7 +1,7 @@
 package cocktail;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
 
 public class Blender implements GetInfo {
      
@@ -12,21 +12,20 @@ public class Blender implements GetInfo {
     Color color ;
     int calory;
 
-   public Blender() {
+    
+    public Blender() {
         this.capacity = 2000;//2L always
         this.volume = 0;
         this.color = new Color(0 , 0 , 0);
         this.calory = 0;
-         ingredients = new ArrayList<>();
+        ingredients = new ArrayList<>();
     }
 
-    
-   
-
-   public int getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
     //No setters for capacity because it's fixed
+    
     public int getVolume() {
         return volume;
     }
@@ -34,16 +33,16 @@ public class Blender implements GetInfo {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-   
-
     public Color getColor() {
         return color;
     }
+
     public void setColor(Color color) {
         this.color = color;
     }
-    
-public ArrayList<Ingredients> getIngredients() {
+
+
+    public ArrayList<Ingredients> getIngredients() {
         return ingredients;
     }
 
@@ -61,73 +60,67 @@ public ArrayList<Ingredients> getIngredients() {
     public int getCalory() {
         return calory;
     }
-
     public void setCalory(int calory) {
         this.calory = calory;
     }
 
-
-    
-    public void add(Ingredients ingredients)
+    public void add(Ingredients ingredient)
     {         
-        if (this.volume + ingredients.getVolume() > capacity)
+        if (this.volume + ingredient.getVolume() <= capacity)
         {
-         this.volume+= ingredients.getVolume();
-        this.ingredients.add(ingredients);
+         this.volume+= ingredient.getVolume();
+         this.ingredients.add(ingredient);
         }
     }
     public void blend() {
        int totalRed = 0 , totalBlue = 0 , totalGreen = 0;
         for (Ingredients ing : ingredients) {
-            totalRed +=  ing.getColor().getR();
-            totalGreen += ing.getColor().getG();
-            totalBlue += ing.getColor().getB();
-            calory += ing.getCalories();
+            totalRed +=  ing.getVolume() * ing.getColor().getR();
+            totalGreen += ing.getVolume()* ing.getColor().getG();
+            totalBlue += ing.getVolume() * ing.getColor().getB();
+            calory += ing.getVolume() * ing.getCalories();
         }   
-        calory /=ingredients.size();
-        color.setR(totalRed /ingredients.size() );
-        color.setG(totalGreen / ingredients.size());
-        color.setB(totalBlue / ingredients.size());
+        
+        color.setR(totalRed / volume);
+        color.setG(totalGreen / volume);
+        color.setB(totalBlue / volume);
     }
-    
-
     public void pour(Cups cup)
     {
-if (this.volume == 0)
+     if (this.volume == 0)
             System.out.println("The blinder is empty");
      else if (this.volume < cup.getCapacity())
      {
          cup.setCalories(calory);
          this.volume = 0;
          this.calory = 0;
-       ingredients.clear();
+         ingredients.clear();
      }   
      else 
-     {
-        cup.setCalories(calory * cup.getCapacity() / this.volume);
+     {   
+         cup.setCalories(calory * cup.getCapacity() / this.volume);
          this.calory -= (this.calory - cup.getCalories());
          this.volume -= cup.getCapacity();
-
      }
     }
 
     public String contains ()
     {
-        HashSet<String> component = new HashSet<>();
+         String component = "The ingredients used in the cocktail :";
         for (Ingredients ing : ingredients)
         {
-            component.add(ing.getName());
+            component += (" " + ing.getName() );
         }
-        String str = "The ingredients used in the cocktail :";
-        for (int i= 0 ; i< component.size() ;i++)
-        str+= " "+component;
         
-        return str;
+        return component;
     }
-
+            
     @Override
     public String getInfo()
     {
- return "The capacity of the blender(gm):"+this.capacity + "\nThe volume of the blender contents(gm) :" +this.volume +"\nThe calories in the cocktail is : "+this.calory;
+      
+        String info =  "The capacity of the blender(gm): "+this.capacity + "\nThe volume of the blender contents(gm) :" +this.volume ;
+        info += "\nThe calories in the cocktail is : "+this.calory + "\nthe color is : r "+ color.getR() + " g "+color.getG()+ " b "+ color.getB() ;
+        return info;
     }
 }

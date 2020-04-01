@@ -2,12 +2,12 @@ package cocktail;
 
 public class Cups implements GetInfo {
     
-   private  int capacity;
-    private int calories;
-
+ private  int capacity;
+   private int calories;
+   
     public Cups(int capacity) {
         this.capacity = capacity;
-      this.calories = 0;
+        this.calories = 0;
     }
 
     public Cups() {
@@ -33,6 +33,6 @@ public class Cups implements GetInfo {
     @Override
     public String getInfo()
     {
-     return "the capacity of the cup is(gm): " + this.capacity + "the total calories of the contenant of the blender is : " + this.calories;
+        return "the capacity of the cup(gm) : " + this.capacity + "\nthe total calories of the contenant of the cup : " + this.calories;
     }
 }

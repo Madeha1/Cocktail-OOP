@@ -2,14 +2,15 @@ package cocktail;
 
 public class Milk extends Ingredients{
   
-    private int volume;
- private Color color;
-   
-    public Milk(String name, int calories, int volume, Color colro) {
+  private int volume;
+    private Color color;
+
+    public Milk(String name, int calories, int volume, Color color) {
         super(name, calories);
         this.volume = volume;
         this.color = color;
     }
+
     @Override
     public int getVolume() {
         return volume;

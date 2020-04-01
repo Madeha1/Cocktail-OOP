@@ -2,12 +2,11 @@ package cocktail;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cocktail {
 
-    
-    public static void main(String[] args) {
-        
-       //stuff that we will use in loop
+public class Cocktail {
+       public static void main(String[] args) {
+           
+        //stuff that we will use in loop
          final  int volumeArray [] = {152,182,118,250,10}; //str, apple , banana,milk ,  suger
          final int calArray [] = {49 , 95 , 100 , 110 , 50};
          final String fruitNames[] ={"Strawberry" , "Apple" , "Banana"}; 
@@ -19,7 +18,7 @@ public class Cocktail {
 
         int number;
         //if add method fail I will repeat adding ingrediants
-        
+
            int emptyVolume = 2000;
             int vol = 0;
             int i;
@@ -32,10 +31,12 @@ public class Cocktail {
                 System.out.println("How maney "+fruitNames[i]+"s you want to add");
                 number = input.nextInt();
                 vol = number * volumeArray[i];
-                blender.add(new Fruits(fruitNames[i], number * calArray[i] , vol , new Color(colorArray[i][0],colorArray[i][1], colorArray[i][3])));
+                blender.add(new Fruits(fruitNames[i], number * calArray[i] , vol , new Color(colorArray[i][0],colorArray[i][1], colorArray[i][2])));
             } 
+            else 
+               vol = 0; 
             emptyVolume -= vol;
-            System.out.println("You have " + emptyVolume + "gram left in the blinder");
+            System.out.println("You have " + emptyVolume + " gram left in the blinder");
                 
             }
             
@@ -44,7 +45,6 @@ public class Cocktail {
             number = input.nextInt();
             vol = number *volumeArray[i];
             blender.add (new Milk( "milk" , number * calArray[i], vol, new Color(255, 255, 255)));
-
             i++;
             emptyVolume -= vol;
             System.out.println("You have " + emptyVolume + " gram left in the blinder");
@@ -55,22 +55,27 @@ public class Cocktail {
         {
             System.out.println("How maney spoons do you want to add ?");
             number = input.nextInt();
-            vol = number * volumeArray[i];
             blender.add(new Sugar(number * calArray[i]));
         } 
-        emptyVolume -= vol;
+
         System.out.println("You have " + emptyVolume + " gram left in the blinder");
 
-    
-          //adding is wrong
-     System.out.println("The ingredient was added successfully");
+  
+     System.out.println("The ingredients was added successfully\n");
+     System.out.println(blender.contains());
+     
         
      blender.blend();
-     System.out.println("The ingredient was blend successfully");
+     System.out.println("The ingredients was blend successfully");
+     System.out.println(blender.getInfo());
+     Cups cup = new Cups(250);
      
-     blender.pour(new Cups(250));
-    
+     blender.pour(cup);
+     System.out.println("The calories in the cup are " +cup.getCalories());
+     blender.getInfo();
+     cup.getInfo();
+       
+        
+     
     }
 }
-
-        
