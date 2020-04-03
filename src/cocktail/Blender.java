@@ -80,55 +80,52 @@ public class Blender implements GetInfo {
         
         
     }
-    public void blend() {
-       int totalRed = 0 , totalBlue = 0 , totalGreen = 0;
-        for (Ingredients ing : ingredients) {
-            totalRed +=  ing.getVolume() * ing.getColor().getR();
-            totalGreen += ing.getVolume()* ing.getColor().getG();
-            totalBlue += ing.getVolume() * ing.getColor().getB();
-            calory += ing.getVolume() * ing.getCalories();
-        }   
-        
-        color.setR(totalRed / volume);
-        color.setG(totalGreen / volume);
-        color.setB(totalBlue / volume);
+    public void blend() throws EmptyBlenderException {
+        if (this.volume == 0) {
+            throw new EmptyBlenderException();
+        } else {
+            int totalRed = 0, totalBlue = 0, totalGreen = 0;
+            for (Ingredients ing : ingredients) {
+                totalRed += ing.getVolume() * ing.getColor().getR();
+                totalGreen += ing.getVolume() * ing.getColor().getG();
+                totalBlue += ing.getVolume() * ing.getColor().getB();
+                calory += ing.getVolume() * ing.getCalories();
+            }
+
+            color.setR(totalRed / volume);
+            color.setG(totalGreen / volume);
+            color.setB(totalBlue / volume);
+        }
     }
-    public void pour(Cups cup) throws EmptyBlenderException{
-     if (this.volume == 0){
-            System.out.println("The blinder is empty");
-     throw new EmptyBlenderException();}
-     else if (this.volume < cup.getCapacity())
-     {
-         cup.setCalories(calory);
-         this.volume = 0;
-         this.calory = 0;
-         ingredients.clear();
-     }   
-     else 
-     {   
-         cup.setCalories(calory * cup.getCapacity() / this.volume);
-         this.calory -= (this.calory - cup.getCalories());
-         this.volume -= cup.getCapacity();
-     }
+   public void pour(Cups cup) throws EmptyBlenderException {
+        if (this.volume == 0) {
+            throw new EmptyBlenderException();
+        } else if (this.volume < cup.getCapacity()) {
+            cup.setCalories(calory);
+            this.volume = 0;
+            this.calory = 0;
+            ingredients.clear();
+        } else {
+            cup.setCalories(calory * cup.getCapacity() / this.volume);
+            this.calory -= (this.calory - cup.getCalories());
+            this.volume -= cup.getCapacity();
+        }
     }
 
-    public String contains ()
-    {
-         String component = "The ingredients used in the cocktail :";
-        for (Ingredients ing : ingredients)
-        {
-            component += (" " + ing.getName() );
+    public String containsInfo() {
+        String component = "The ingredients used in the cocktail :\n";
+        for (Ingredients ing : ingredients) {
+            component += (" " + ing.getInfo() + "\n");
         }
-        
+
         return component;
     }
             
-    @Override
-    public String getInfo()
-    {
-      
-        String info =  "The capacity of the blender(gm): "+this.capacity + "\nThe volume of the blender contents(gm) :" +this.volume ;
-        info += "\nThe calories in the cocktail is : "+this.calory + "\nthe color is : r "+ color.getR() + " g "+color.getG()+ " b "+ color.getB() ;
+   @Override
+    public String getInfo() {
+
+        String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume;
+        info += "\nThe calories in the cocktail is : " + this.calory + " " + color.getInfo();
         return info;
     }
 }

@@ -25,7 +25,7 @@ public class Sugar extends Ingredients {
     @Override
     public String getInfo()
     {
-        return super.getInfo();
+        return super.getInfo() + " , it's volume : " +  getVolume() + " gm and " +color.getInfo();
     }
     
 }

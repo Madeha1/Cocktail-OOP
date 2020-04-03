@@ -37,10 +37,16 @@ public class Color implements GetInfo{
         return R;
     }
 
-    @Override
-    public String getInfo()
-    {
-        return "the rgb color is : "+ this.R +","+this.G+","+this.B+"\n";
+    //find the color of the cocktail
+
+    public String mostColor() {
+        return (Math.max(Math.max(R, G), R)) + "";
     }
+
+    @Override
+    public String getInfo() {
+        return "the rgb color is : " + this.R + "," + this.G + "," + this.B;
+    }
+
     
 }
