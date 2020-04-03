@@ -64,13 +64,21 @@ public class Blender implements GetInfo {
         this.calory = calory;
     }
 
-    public void add(Ingredients ingredient)
-    {         
-        if (this.volume + ingredient.getVolume() <= capacity)
+    public void add(Ingredients ingredient)throws BlenderOverFlowException { 
+
+    if(this.volume + ingredient.getVolume() > capacity){
+        throw new BlenderOverFlowException();
+               } 
+
+        else //(this.volume + ingredient.getVolume() <= capacity)
         {
          this.volume+= ingredient.getVolume();
          this.ingredients.add(ingredient);
         }
+         
+        
+        
+        
     }
     public void blend() {
        int totalRed = 0 , totalBlue = 0 , totalGreen = 0;
@@ -85,10 +93,10 @@ public class Blender implements GetInfo {
         color.setG(totalGreen / volume);
         color.setB(totalBlue / volume);
     }
-    public void pour(Cups cup)
-    {
-     if (this.volume == 0)
+    public void pour(Cups cup) throws EmptyBlenderException{
+     if (this.volume == 0){
             System.out.println("The blinder is empty");
+     throw new EmptyBlenderException();}
      else if (this.volume < cup.getCapacity())
      {
          cup.setCalories(calory);

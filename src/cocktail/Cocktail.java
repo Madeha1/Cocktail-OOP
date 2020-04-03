@@ -1,6 +1,8 @@
 package cocktail;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Cocktail {
@@ -26,12 +28,17 @@ public class Cocktail {
             //Add fruits
             for(i = 0 ; i < fruitNames.length ; i++)
             {
-                System.out.println("Do you want to add "+fruitNames[i]+" ? (Y/N)");
+                System.out.println("Do you want to add "+fruitNames[i]+" ? (Y/N)" );
             if (input.next().charAt(0) == 'Y') {
-                System.out.println("How maney "+fruitNames[i]+"s you want to add");
+                System.out.println("How maney "+fruitNames[i]+"s you want to add ?(" + fruitNames[i] + " volume = "+volumeArray[i]+ " )");
                 number = input.nextInt();
                 vol = number * volumeArray[i];
-                blender.add(new Fruits(fruitNames[i], number * calArray[i] , vol , new Color(colorArray[i][0],colorArray[i][1], colorArray[i][2])));
+                    try {
+                        blender.add(new Fruits(fruitNames[i], number * calArray[i] , vol , new Color(colorArray[i][0],colorArray[i][1], colorArray[i][2])));
+                    }
+                    catch (BlenderOverFlowException ex) {
+                        Logger.getLogger(Cocktail.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             } 
             else 
                vol = 0; 
@@ -41,10 +48,14 @@ public class Cocktail {
             }
             
             //Adding Milk
-            System.out.println("How maney cups of milk do you want to add?");
+            System.out.println("How maney cups of milk do you want to add? ( milk volume = 250 )");
             number = input.nextInt();
             vol = number *volumeArray[i];
-            blender.add (new Milk( "milk" , number * calArray[i], vol, new Color(255, 255, 255)));
+           try {
+               blender.add (new Milk( "milk" , number * calArray[i], vol, new Color(255, 255, 255)));
+           } catch (BlenderOverFlowException ex) {
+               Logger.getLogger(Cocktail.class.getName()).log(Level.SEVERE, null, ex);
+           }
             i++;
             emptyVolume -= vol;
             System.out.println("You have " + emptyVolume + " gram left in the blinder");
@@ -55,7 +66,11 @@ public class Cocktail {
         {
             System.out.println("How maney spoons do you want to add ?");
             number = input.nextInt();
-            blender.add(new Sugar(number * calArray[i]));
+             try {
+                 blender.add(new Sugar(number * calArray[i]));
+             } catch (BlenderOverFlowException ex) {
+                 Logger.getLogger(Cocktail.class.getName()).log(Level.SEVERE, null, ex);
+             }
         } 
 
         System.out.println("You have " + emptyVolume + " gram left in the blinder");
@@ -70,7 +85,11 @@ public class Cocktail {
      System.out.println(blender.getInfo());
      Cups cup = new Cups(250);
      
-     blender.pour(cup);
+           try {
+               blender.pour(cup);
+           } catch (EmptyBlenderException ex) {
+               Logger.getLogger(Cocktail.class.getName()).log(Level.SEVERE, null, ex);
+           }
      System.out.println("The calories in the cup are " +cup.getCalories());
      blender.getInfo();
      cup.getInfo();
