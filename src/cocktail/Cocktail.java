@@ -60,7 +60,6 @@ public class Cocktail {
         //Add fruits
         //We decided to make a loop so the code can be more general and if we decided to add more fruits it will be better
         boolean success;
-        boolean su;
         for (i = 0; i < fruitNames.length; i++) {
             do {
                 success = true;
@@ -134,6 +133,10 @@ public class Cocktail {
         } catch (EmptyBlenderException ex) {
             System.out.println(ex.getMessage());
             status = false;
+        }
+        catch(NotBlendedException ex)
+        {
+            System.out.println(ex.getMessage());
         }
         if (status) {
             System.out.println("the cocktail was poured successfully to the cup!\n ");
