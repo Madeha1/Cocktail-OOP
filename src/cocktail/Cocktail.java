@@ -76,13 +76,15 @@ public class Cocktail {
                     }
                 }
             } while (!success);
-            emptyVolume = blender.getCapacity() - blender.getVolume();
-            System.out.println("You have " + emptyVolume + " gram left in the blinder");
+            System.out.println("You have " + blender.emptyVolume() + " gram left in the blinder");
         }
 
         //Adding Milk
+       
         do {
             success = true;
+            System.out.println("Do you want to add Milk ? (Y/N)");
+            if (getChar() == 'Y') {
             System.out.println("How maney cups of milk do you want to add? (Milk  volume = " + volumeArray[i] + " )");
             try {
                 number = getNumber();
@@ -92,10 +94,11 @@ public class Cocktail {
                 System.out.println(ex.getMessage());
                 success = false;
             }
+         }
         } while (!success);
         i++;
-        emptyVolume = blender.getCapacity() - blender.getVolume();
-        System.out.println("You have " + emptyVolume + " gram left in the blinder");
+        
+        System.out.println("You have " + blender.emptyVolume() + " gram left in the blinder");
 
         //Adding Suger
         //No do-while here because the suger does not have any volume.
@@ -109,10 +112,11 @@ public class Cocktail {
                 System.out.println(ex.getMessage());
             }
         }
-        System.out.println("You have " + emptyVolume + " gram left in the blinder");
+        System.out.println("You have " + blender.emptyVolume() + " gram left in the blinder");
         System.out.println("The ingredients was added successfully!\n");
-
         System.out.println(blender.containsInfo());
+        
+        //blend
         boolean status = true;
         try {
             blender.blend();
@@ -123,9 +127,12 @@ public class Cocktail {
         if (status) {
             System.out.println("The ingredients was blend successfully!\n");
         }
+        
+    
         System.out.println(blender.getInfo());
         Cups cup = new Cups(250);
 
+        
         status = true;
         //pour
         try {
@@ -137,6 +144,7 @@ public class Cocktail {
         catch(NotBlendedException ex)
         {
             System.out.println(ex.getMessage());
+            status = false;
         }
         if (status) {
             System.out.println("the cocktail was poured successfully to the cup!\n ");

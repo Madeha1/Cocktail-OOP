@@ -1,6 +1,7 @@
 package cocktail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Blender implements GetInfo {
 
@@ -64,25 +65,25 @@ public class Blender implements GetInfo {
             this.volume += ingredient.getVolume();
             this.ingredients.add(ingredient);
         }
+        this.calory = 0;  //If a new ingredient where added after blending or pouring I have to start from 0 
     }
 
     public void blend() throws EmptyBlenderException {
         if (this.volume == 0) {
             throw new EmptyBlenderException();
         } else {
-            int totalRed = 0, totalBlue = 0, totalGreen = 0;
+            int totalRed = 0, totalBlue = 0, totalGreen = 0 ;
+           
             for (Ingredients ing : ingredients) {
                 totalRed += ing.getVolume() * ing.getColor().getR();
                 totalGreen += ing.getVolume() * ing.getColor().getG();
                 totalBlue += ing.getVolume() * ing.getColor().getB();
-                calory += ing.getVolume() * ing.getCalories();
+                this.calory += ing.getCalories();
             }
 
-            color.setR(totalRed / volume);
-            color.setG(totalGreen / volume);
-            color.setB(totalBlue / volume);
-            ingredients.clear();
-
+            this.color.setR(totalRed / this.volume);
+            this.color.setG(totalGreen / this.volume);
+            this.color.setB(totalBlue / this.volume);
         }
     }
 
@@ -90,33 +91,38 @@ public class Blender implements GetInfo {
         if (this.volume == 0) //empty
         {
             throw new EmptyBlenderException();
-        } else if (!ingredients.isEmpty())//not blended
+        } else if (calory ==0)//not blended
         {
             throw new NotBlendedException();
         } else if (this.volume < cup.getCapacity()) {
             cup.setCalories(calory);
             this.volume = 0;
             this.calory = 0;
+            ingredients.clear();
         } else {
             cup.setCalories(calory * cup.getCapacity() / this.volume);
             this.calory -= (this.calory - cup.getCalories());
             this.volume -= cup.getCapacity();
         }
     }
-
+    public int emptyVolume()
+    {
+        return this.capacity - this.volume;
+    }
     public String containsInfo() {
-        String component = "The ingredients used in the cocktail :\n";
-        for (Ingredients ing : ingredients) {
-            component += (" " + ing.getInfo() + "\n");
-        }
-
-        return component;
+        String info = "The blender contains : ";
+        HashSet<String> setOfIngredients = new HashSet<>();
+        for (Ingredients ing : ingredients)
+            setOfIngredients.add(ing.getName());
+         for (String i : setOfIngredients)  
+            info += i + "  ";  
+        return info;
     }
 
     @Override
     public String getInfo() {
 
-        String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume;
+        String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume + "The empty space in the blender :"+ (emptyVolume());
         info += "\nThe calories in the cocktail is : " + this.calory + " " + color.getInfo();
         return info;
     }
