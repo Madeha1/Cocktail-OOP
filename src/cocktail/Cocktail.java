@@ -21,6 +21,7 @@ public class Cocktail {
             } catch (InputMismatchException ex) {
                 input.next();// we use it because if we remove it it will enetr an infinite loop (it work as a cleaner for the console)
                 System.out.print("That's not an integer. Try again:");
+           
                 status = false;
             }
         } while (!status);
@@ -114,7 +115,6 @@ public class Cocktail {
         }
         System.out.println("You have " + blender.emptyVolume() + " gram left in the blinder");
         System.out.println("The ingredients was added successfully!\n");
-        System.out.println(blender.containsInfo());
         
         //blend
         boolean status = true;

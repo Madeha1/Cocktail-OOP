@@ -109,16 +109,7 @@ public class Blender implements GetInfo {
     {
         return this.capacity - this.volume;
     }
-    public String containsInfo() {
-        String info = "The blender contains : ";
-        HashSet<String> setOfIngredients = new HashSet<>();
-        for (Ingredients ing : ingredients)
-            setOfIngredients.add(ing.getName());
-         for (String i : setOfIngredients)  
-            info += i + "  ";  
-        return info;
-    }
-
+    
     @Override
     public String getInfo() {
 
