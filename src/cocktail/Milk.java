@@ -33,6 +33,6 @@ public class Milk extends Ingredients{
     @Override
     public String getInfo()
     {
-        return super.getInfo() + " , it's volume : " +  getVolume() + " gm and " +color.getInfo();
+        return super.getInfo() + "It's volume : " +  getVolume() + "gm\n" +color.getInfo();
     }
 }

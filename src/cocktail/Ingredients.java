@@ -33,6 +33,6 @@ public abstract  class Ingredients  implements GetInfo {
     @Override
     public String getInfo()
     {
-        return getName() + " contains " + getCalories() + " calories"; 
+        return getName() + " contains\n" + getCalories() + " calories\n"; 
     }
 }

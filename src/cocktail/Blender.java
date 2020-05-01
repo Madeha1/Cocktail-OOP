@@ -109,11 +109,19 @@ public class Blender implements GetInfo {
     {
         return this.capacity - this.volume;
     }
-    
+    void clear()
+    {
+        this.ingredients.clear();
+        this.calory = 0;
+        this.volume = 0;
+        this.color.setB(0);
+        this.color.setR(0);
+        this.color.setG(0);
+    }
     @Override
     public String getInfo() {
 
-        String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume + "The empty space in the blender :"+ (emptyVolume());
+        String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume + "\nThe empty space in the blender :"+ (emptyVolume());
         info += "\nThe calories in the cocktail is : " + this.calory + " " + color.getInfo();
         return info;
     }
