@@ -16,7 +16,7 @@ import sun.security.pkcs.ParsingException;
 public class CocktailFrame extends javax.swing.JFrame {
 
     //fixed information about the ingredients that we will use in loop
-    final int volumeArray[] = {152, 182, 118, 250}; //str, apple , banana
+    final int volumeArray[] = {152, 182, 118}; //str, apple , banana
     final int milkVolume = 250;
     final int calArray[] = {49, 95, 100};
     final int milkCal = 110;
@@ -24,7 +24,8 @@ public class CocktailFrame extends javax.swing.JFrame {
     final String fruitNames[] = {"Strawberry", "Apple", "Banana"};
     final int[][] colorArray = {{255, 54, 50}, {171, 255, 127}, {255, 253, 26}};
     Blender blender = new Blender();
-    ArrayList <Cups>cupsArray = new ArrayList<>();
+    ArrayList<Cups> cupsArray = new ArrayList<>();
+
     void showIngredientsList() {
         ArrayList<Ingredients> ingredients = blender.getIngredients();
         String names[] = new String[ingredients.size()];
@@ -33,15 +34,15 @@ public class CocktailFrame extends javax.swing.JFrame {
         }
         ingredientsList.setListData(names);
     }
-    void showCupsList()
-    {
+
+    void showCupsList() {
         String cupsNames[] = new String[cupsArray.size()];
         for (int i = 0; i < cupsNames.length; i++) {
-            cupsNames[i] = "Cup number :" + i;
+            cupsNames[i] = "Cup number :" + (i+1);
         }
         cupsList.setListData(cupsNames);
     }
-    
+
     /**
      * Creates new form CocktailFrame
      */
@@ -72,10 +73,14 @@ public class CocktailFrame extends javax.swing.JFrame {
         appleTextField = new javax.swing.JTextField();
         bananaTextField = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         milkTextField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         yesSugarRadioButton = new javax.swing.JRadioButton();
@@ -158,6 +163,12 @@ public class CocktailFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("(152gm)");
+
+        jLabel9.setText("(182gm)");
+
+        jLabel13.setText("(118gm)");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -166,21 +177,31 @@ public class CocktailFrame extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(appleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(strawberryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(bananaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(197, 197, 197)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(appleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel8)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(strawberryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel13)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(bananaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -191,17 +212,20 @@ public class CocktailFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(strawberryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(strawberryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(appleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(bananaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(bananaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)
+                        .addComponent(jLabel4)))
                 .addGap(28, 28, 28))
         );
 
@@ -223,6 +247,8 @@ public class CocktailFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setText("(250gm)");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -230,9 +256,11 @@ public class CocktailFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(milkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,7 +271,8 @@ public class CocktailFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(milkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(milkTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -335,10 +364,10 @@ public class CocktailFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,17 +582,22 @@ public class CocktailFrame extends javax.swing.JFrame {
         try {
             int num = getNumber(milkTextField.getText());//this function is to return 0 if the string is empty
             int vol = num * milkVolume;
-            if (vol != 0) {
+            if (vol > 0) {
                 blender.add(new Milk("Milk", milkCal * num, vol, new Color(255, 255, 255)));
+                JOptionPane.showMessageDialog(this, "Milk was added successfully!\nThe space remained " + blender.emptyVolume());
                 showIngredientsList();
+            } else if (vol < 0) {
+                JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding milk", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            milkTextField.setText("");
+
         } catch (IllegalArgumentException ex) {//parsing
             JOptionPane.showMessageDialog(this, "You didn't Enter an integer when adding milk", "Error", JOptionPane.ERROR_MESSAGE);//may switch to get message
         } catch (BlenderOverFlowException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            milkTextField.setText("");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -572,9 +606,10 @@ public class CocktailFrame extends javax.swing.JFrame {
             int size = Integer.parseInt(JOptionPane.showInputDialog("Enter the size of the cup(in grams)"));
             Cups cup = new Cups(size);
             blender.pour(cup);
+            messageLabel.setText("The cocktail is poured to the cup successfully!");
             cupsArray.add(cup);
             showCupsList();
-            
+
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, "The size of the cup is not entered correctly, Enter an integer", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (EmptyBlenderException | NotBlendedException ex) {
@@ -583,15 +618,14 @@ public class CocktailFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-           JOptionPane.showMessageDialog(this, blender.getInfo());
+        JOptionPane.showMessageDialog(this, blender.getInfo());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to clean you blinder?" , "Confirm Cleaning" , JOptionPane.YES_NO_OPTION);
-        if (opt == 0)
-        {
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to clean you blinder?", "Confirm Cleaning", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
             blender.clear();
-            messageLabel.setText("Cleaned successfully");
+            messageLabel.setText("blender is cleaned successfully!");
             ingredientsList.setListData(new String[0]);
             ingredientsArea.setText("");
         }
@@ -631,17 +665,19 @@ public class CocktailFrame extends javax.swing.JFrame {
             numbers.add(num);
             num = getNumber(bananaTextField.getText());
             numbers.add(num);
-
-            for (int i = 0; i < numbers.size(); i++) {
+            int i;
+            for (i = 0; i < numbers.size(); i++) {
                 int vol = numbers.get(i) * volumeArray[i];
-                if (vol != 0) {
+                if (vol > 0) {
                     blender.add(new Fruits(fruitNames[i], numbers.get(i) * calArray[i], vol, new Color(colorArray[i][0], colorArray[i][1], colorArray[i][2])));
+                    JOptionPane.showMessageDialog(this, fruitNames[i] + " was added successfully!\nThe space remained " + blender.emptyVolume());
                     showIngredientsList();
+                } else if (vol < 0) {
+                    JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding a "+fruitNames[i], "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
-            strawberryTextField.setText("");
-            bananaTextField.setText("");
-            appleTextField.setText("");
+
             //must add blinder exception & parsing
         } catch (IllegalArgumentException ex) {//parsing
             JOptionPane.showMessageDialog(this, "You didn't Enter an integer when adding a fruit", "Error", JOptionPane.ERROR_MESSAGE);//may switch to get message
@@ -649,6 +685,11 @@ public class CocktailFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+
+            strawberryTextField.setText("");
+            bananaTextField.setText("");
+            appleTextField.setText("");
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -659,30 +700,31 @@ public class CocktailFrame extends javax.swing.JFrame {
             if (yesSugarRadioButton.isSelected()) {
                 num = Integer.parseInt(sugarTextField.getText());
             }
-            if (num != 0) {
+            if (num > 0) {
                 blender.add(new Sugar(sugerCal * num));
                 showIngredientsList();
             }
-            sugarTextField.setText("");
+           else if (num < 0)
+                    JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {//parsing
             JOptionPane.showMessageDialog(this, "You didn't Enter an integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);//may switch to get message
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            sugarTextField.setText("");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void cupsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cupsListValueChanged
         int index = cupsList.getSelectedIndex();
-        if (index != -1)
-        {
+        if (index != -1) {
             cupsInfoArea.setText(cupsArray.get(index).getInfo());
         }
     }//GEN-LAST:event_cupsListValueChanged
 
     private void ingredientsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ingredientsListValueChanged
         int index = ingredientsList.getSelectedIndex();
-        if (index != -1)
-        {
+        if (index != -1) {
             ingredientsArea.setText(blender.getIngredients().get(index).getInfo());
         }
     }//GEN-LAST:event_ingredientsListValueChanged
@@ -741,13 +783,17 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

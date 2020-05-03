@@ -1,7 +1,6 @@
 package cocktail;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Blender implements GetInfo {
 
@@ -101,7 +100,7 @@ public class Blender implements GetInfo {
             ingredients.clear();
         } else {
             cup.setCalories(calory * cup.getCapacity() / this.volume);
-            this.calory -= (this.calory - cup.getCalories());
+            this.calory = (this.calory - cup.getCalories());
             this.volume -= cup.getCapacity();
         }
     }
@@ -122,7 +121,10 @@ public class Blender implements GetInfo {
     public String getInfo() {
 
         String info = "The capacity of the blender(gm): " + this.capacity + "\nThe volume of the blender contents(gm) :" + this.volume + "\nThe empty space in the blender :"+ (emptyVolume());
-        info += "\nThe calories in the cocktail is : " + this.calory + " " + color.getInfo();
+        if (calory != 0)
+        info += "\nThe calories in the cocktail is : " + this.calory + "\n" + color.getInfo();
+        else 
+            info += "\nThe bliinder is not blended yet!";
         return info;
     }
 }
