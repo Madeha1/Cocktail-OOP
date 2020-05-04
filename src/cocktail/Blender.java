@@ -1,15 +1,16 @@
 package cocktail;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Blender implements GetInfo {
+public class Blender implements GetInfo , Serializable {
 
     private final int capacity;
     private int volume;
     ArrayList<Ingredients> ingredients;
     Color color;
     int calory;
-
+    
     public Blender() {
         this.capacity = 2000;//2L always
         this.volume = 0;

@@ -5,6 +5,9 @@ public abstract  class Ingredients  implements GetInfo {
 
     private int calories;
 
+    public Ingredients() {
+    }
+
     public Ingredients(String name, int calories) {
         this.name = name;
         this.calories = calories;  

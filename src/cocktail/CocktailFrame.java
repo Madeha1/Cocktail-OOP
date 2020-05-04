@@ -61,6 +61,11 @@ public class CocktailFrame extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -107,6 +112,11 @@ public class CocktailFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         cupsInfoArea = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -118,6 +128,16 @@ public class CocktailFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 505, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
+
+        jMenu4.setText("File");
+        jMenuBar2.add(jMenu4);
+
+        jMenu7.setText("Edit");
+        jMenuBar2.add(jMenu7);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cocktail");
@@ -536,6 +556,31 @@ public class CocktailFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cups", jPanel7);
 
+        jMenu3.setText("File");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+
+        jMenu8.setText("New");
+        jMenu8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenu8);
+
+        jMenu5.setText("Open");
+        jMenu3.add(jMenu5);
+
+        jMenu6.setText("Save");
+        jMenu3.add(jMenu6);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -546,37 +591,100 @@ public class CocktailFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 42, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void strawberryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strawberryTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_strawberryTextFieldActionPerformed
+    private void cupsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cupsListValueChanged
+        int index = cupsList.getSelectedIndex();
+        if (index != -1) {
+            cupsInfoArea.setText(cupsArray.get(index).getInfo());
+        }
+    }//GEN-LAST:event_cupsListValueChanged
 
-    private void appleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appleTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_appleTextFieldActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to clean you blinder?", "Confirm Cleaning", JOptionPane.YES_NO_OPTION);
+        if (opt == 0) {
+            blender.clear();
+            messageLabel.setText("blender is cleaned successfully!");
+            ingredientsList.setListData(new String[0]);
+            ingredientsArea.setText("");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void bananaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bananaTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bananaTextFieldActionPerformed
+    private void ingredientsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ingredientsListValueChanged
+        int index = ingredientsList.getSelectedIndex();
+        if (index != -1) {
+            ingredientsArea.setText(blender.getIngredients().get(index).getInfo());
+        }
+    }//GEN-LAST:event_ingredientsListValueChanged
 
-    private void yesSugarRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesSugarRadioButtonActionPerformed
-        boolean selected = yesSugarRadioButton.isSelected();
-        sugarTextField.setEnabled(selected);
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JOptionPane.showMessageDialog(this, blender.getInfo());
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    }//GEN-LAST:event_yesSugarRadioButtonActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            int size = Integer.parseInt(JOptionPane.showInputDialog("Enter the size of the cup(in grams)"));
+            Cups cup = new Cups(size);
+            blender.pour(cup);
+            messageLabel.setText("The cocktail is poured to the cup successfully!");
+            cupsArray.add(cup);
+            showCupsList();
 
-    private void milkTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_milkTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_milkTextFieldActionPerformed
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "The size of the cup is not entered correctly, Enter an integer", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (EmptyBlenderException | NotBlendedException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            blender.blend();
+            messageLabel.setText("The Ingredients have been Blended successfully");
+        } catch (EmptyBlenderException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        try {
+            int num = 0;
+            if (yesSugarRadioButton.isSelected()) {
+                num = Integer.parseInt(sugarTextField.getText());
+            }
+            if (num > 0) {
+                blender.add(new Sugar(sugerCal * num));
+                showIngredientsList();
+            }
+            else if (num < 0)
+            JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {//parsing
+            JOptionPane.showMessageDialog(this, "You didn't Enter an integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);//may switch to get message
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            sugarTextField.setText("");
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void sugarTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sugarTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sugarTextFieldActionPerformed
+
+    private void noSugarRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noSugarRadioButtonActionPerformed
+        boolean selected = noSugarRadioButton.isSelected();
+        sugarTextField.setEnabled(!selected);
+        sugarTextField.setText("");
+    }//GEN-LAST:event_noSugarRadioButtonActionPerformed
+
+    private void yesSugarRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesSugarRadioButtonActionPerformed
+        boolean selected = yesSugarRadioButton.isSelected();
+        sugarTextField.setEnabled(selected);
+    }//GEN-LAST:event_yesSugarRadioButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
@@ -601,59 +709,9 @@ public class CocktailFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            int size = Integer.parseInt(JOptionPane.showInputDialog("Enter the size of the cup(in grams)"));
-            Cups cup = new Cups(size);
-            blender.pour(cup);
-            messageLabel.setText("The cocktail is poured to the cup successfully!");
-            cupsArray.add(cup);
-            showCupsList();
-
-        } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, "The size of the cup is not entered correctly, Enter an integer", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (EmptyBlenderException | NotBlendedException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JOptionPane.showMessageDialog(this, blender.getInfo());
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int opt = JOptionPane.showConfirmDialog(null, "Are you sure you want to clean you blinder?", "Confirm Cleaning", JOptionPane.YES_NO_OPTION);
-        if (opt == 0) {
-            blender.clear();
-            messageLabel.setText("blender is cleaned successfully!");
-            ingredientsList.setListData(new String[0]);
-            ingredientsArea.setText("");
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            blender.blend();
-            messageLabel.setText("The Ingredients have been Blended successfully");
-        } catch (EmptyBlenderException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void noSugarRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noSugarRadioButtonActionPerformed
-        boolean selected = noSugarRadioButton.isSelected();
-        sugarTextField.setEnabled(!selected);
-        sugarTextField.setText("");
-    }//GEN-LAST:event_noSugarRadioButtonActionPerformed
-
-    //if the text field empty replace it with zero
-    int getNumber(String textField) {
-        if (textField.equals("")) {
-            return 0;
-        } else {
-            return Integer.parseInt(textField);
-        }
-    }
+    private void milkTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_milkTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_milkTextFieldActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
@@ -691,43 +749,39 @@ public class CocktailFrame extends javax.swing.JFrame {
             bananaTextField.setText("");
             appleTextField.setText("");
         }
-
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try {
-            int num = 0;
-            if (yesSugarRadioButton.isSelected()) {
-                num = Integer.parseInt(sugarTextField.getText());
-            }
-            if (num > 0) {
-                blender.add(new Sugar(sugerCal * num));
-                showIngredientsList();
-            }
-           else if (num < 0)
-                    JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (IllegalArgumentException ex) {//parsing
-            JOptionPane.showMessageDialog(this, "You didn't Enter an integer when adding suger", "Error", JOptionPane.ERROR_MESSAGE);//may switch to get message
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            sugarTextField.setText("");
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void bananaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bananaTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bananaTextFieldActionPerformed
 
-    private void cupsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cupsListValueChanged
-        int index = cupsList.getSelectedIndex();
-        if (index != -1) {
-            cupsInfoArea.setText(cupsArray.get(index).getInfo());
-        }
-    }//GEN-LAST:event_cupsListValueChanged
+    private void appleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appleTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appleTextFieldActionPerformed
 
-    private void ingredientsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ingredientsListValueChanged
-        int index = ingredientsList.getSelectedIndex();
-        if (index != -1) {
-            ingredientsArea.setText(blender.getIngredients().get(index).getInfo());
+    private void strawberryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_strawberryTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_strawberryTextFieldActionPerformed
+
+    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+            blender.clear();
+            messageLabel.setText("blender is cleaned successfully!");
+            ingredientsList.setListData(new String[0]);
+            ingredientsArea.setText("");    
+    }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    //if the text field empty replace it with zero
+    int getNumber(String textField) {
+        if (textField.equals("")) {
+            return 0;
+        } else {
+            return Integer.parseInt(textField);
         }
-    }//GEN-LAST:event_ingredientsListValueChanged
+    }
 
     /**
      * @param args the command line arguments
@@ -794,6 +848,16 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

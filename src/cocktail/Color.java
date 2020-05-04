@@ -1,6 +1,8 @@
 package cocktail;
 
-public class Color implements GetInfo{
+import java.io.Serializable;
+
+public class Color implements GetInfo , Serializable{
    
     private int R ;
     private int G;
