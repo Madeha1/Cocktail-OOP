@@ -96,11 +96,13 @@ public class Blender implements GetInfo , Serializable {
             throw new NotBlendedException();
         } else if (this.volume < cup.getCapacity()) {
             cup.setCalories(calory);
+            cup.setVolume(volume);
             this.volume = 0;
             this.calory = 0;
             ingredients.clear();
         } else {
             cup.setCalories(calory * cup.getCapacity() / this.volume);
+            cup.setVolume(cup.getCalories());
             this.calory = (this.calory - cup.getCalories());
             this.volume -= cup.getCapacity();
         }

@@ -3,8 +3,11 @@ package cocktail;
 public class Fruits extends Ingredients{
     
  private int volume;
-    private Color color;
+ private Color color;
 
+    public Fruits() {
+    }
+   
     public Fruits(String name, int calories, int volume, Color color) {
         super(name, calories);
         this.volume = volume;

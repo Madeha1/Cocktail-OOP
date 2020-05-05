@@ -1,6 +1,8 @@
 package cocktail;
 
-public abstract  class Ingredients  implements GetInfo {
+import java.io.Serializable;
+
+public abstract  class Ingredients  implements GetInfo  ,Serializable{
    private String name;
 
     private int calories;

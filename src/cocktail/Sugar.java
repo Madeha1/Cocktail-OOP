@@ -4,6 +4,12 @@ public class Sugar extends Ingredients {
 
    private final int volume;
     private final Color color;
+
+    public Sugar() {
+        this.volume = 0;
+        this.color =new Color(255,255,255) ;
+    }
+    
     
     public Sugar(int calories){
         super("Sugar", calories);

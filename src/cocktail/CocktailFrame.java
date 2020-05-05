@@ -5,9 +5,16 @@
  */
 package cocktail;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sun.security.pkcs.ParsingException;
 
 /**
  *
@@ -42,7 +49,49 @@ public class CocktailFrame extends javax.swing.JFrame {
         }
         cupsList.setListData(cupsNames);
     }
-
+    public <E> void saveObj (E object ,String fileName){
+        ObjectOutputStream oos =null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream (fileName));
+            oos.writeObject(object);
+        } catch (FileNotFoundException ex) {
+           JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }finally{
+            try {
+                oos.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    public <E> E loadObj(String fileName)
+    {
+        E obj = null;
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(fileName));
+            obj = (E) ois.readObject();
+            
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage()+"nj", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }finally{
+            try {
+                ois.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            finally{
+            return obj;
+            }
+        }
+        
+    }
     /**
      * Creates new form CocktailFrame
      */
@@ -114,9 +163,9 @@ public class CocktailFrame extends javax.swing.JFrame {
         cupsInfoArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -563,19 +612,29 @@ public class CocktailFrame extends javax.swing.JFrame {
             }
         });
 
-        jMenu8.setText("New");
-        jMenu8.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("New");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu8ActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenu8);
+        jMenu3.add(jMenuItem1);
 
-        jMenu5.setText("Open");
-        jMenu3.add(jMenu5);
+        jMenuItem2.setText("Save");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
 
-        jMenu6.setText("Save");
-        jMenu3.add(jMenu6);
+        jMenuItem3.setText("Open");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
 
@@ -763,16 +822,26 @@ public class CocktailFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_strawberryTextFieldActionPerformed
 
-    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
-            blender.clear();
-            messageLabel.setText("blender is cleaned successfully!");
-            ingredientsList.setListData(new String[0]);
-            ingredientsArea.setText("");    
-    }//GEN-LAST:event_jMenu8ActionPerformed
-
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        blender.clear();
+        messageLabel.setText("blender is cleaned successfully!");
+        ingredientsList.setListData(new String[0]);
+        ingredientsArea.setText("");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        saveObj(blender , "belnder.dat");
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.blender = loadObj("belnder.dat");
+        showIngredientsList();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     //if the text field empty replace it with zero
     int getNumber(String textField) {
@@ -852,12 +921,12 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

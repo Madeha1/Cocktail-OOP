@@ -5,6 +5,9 @@ public class Milk extends Ingredients{
   private int volume;
     private Color color;
 
+    public Milk() {
+    }
+
     public Milk(String name, int calories, int volume, Color color) {
         super(name, calories);
         this.volume = volume;
