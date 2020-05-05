@@ -831,6 +831,8 @@ public class CocktailFrame extends javax.swing.JFrame {
         messageLabel.setText("blender is cleaned successfully!");
         ingredientsList.setListData(new String[0]);
         ingredientsArea.setText("");
+        cupsArray.clear();
+        showCupsList();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
