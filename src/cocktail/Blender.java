@@ -102,7 +102,7 @@ public class Blender implements GetInfo , Serializable {
             ingredients.clear();
         } else {
             cup.setCalories(calory * cup.getCapacity() / this.volume);
-            cup.setVolume(cup.getCalories());
+            cup.setVolume(cup.getCapacity());
             this.calory = (this.calory - cup.getCalories());
             this.volume -= cup.getCapacity();
         }
