@@ -32,6 +32,7 @@ public class StartingJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
@@ -46,7 +47,7 @@ public class StartingJFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Aharoni", 1, 18)); // NOI18N
         jLabel2.setText("Made By :   Madeha Tahboub & Lana Qawasmy");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 550, 409, 27);
+        jLabel2.setBounds(70, 580, 405, 27);
 
         jToggleButton1.setText("Start");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,11 +56,15 @@ public class StartingJFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(260, 440, 60, 32);
+        jToggleButton1.setBounds(230, 450, 60, 32);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cocktail/original.gif"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(110, 60, 300, 480);
+        jLabel4.setBounds(80, 60, 350, 480);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cocktail/pp.jpg"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 560, 610);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,6 +114,7 @@ public class StartingJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
