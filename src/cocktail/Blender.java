@@ -18,7 +18,7 @@ public class Blender implements GetInfo , Serializable {
         this.calory = 0;
         ingredients = new ArrayList<>();
     }
-
+   
     public int getCapacity() {
         return capacity;
     }

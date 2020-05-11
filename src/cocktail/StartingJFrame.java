@@ -41,12 +41,12 @@ public class StartingJFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Ink Free", 1, 30)); // NOI18N
         jLabel1.setText("Welcome To Cocktail Maker !");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, -10, 420, 61);
+        jLabel1.setBounds(60, 0, 420, 61);
 
         jLabel2.setFont(new java.awt.Font("Aharoni", 1, 18)); // NOI18N
         jLabel2.setText("Made By :   Madeha Tahboub & Lana Qawasmy");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 550, 405, 27);
+        jLabel2.setBounds(70, 550, 409, 27);
 
         jToggleButton1.setText("Start");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,11 +55,11 @@ public class StartingJFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jToggleButton1);
-        jToggleButton1.setBounds(150, 470, 60, 32);
+        jToggleButton1.setBounds(260, 440, 60, 32);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cocktail/original.gif"))); // NOI18N
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 10, 420, 620);
+        jLabel4.setBounds(110, 60, 300, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
