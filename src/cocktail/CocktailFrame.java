@@ -768,6 +768,8 @@ public class CocktailFrame extends javax.swing.JFrame {
         } finally {
             sugarTextField.setText("");
             noSugarRadioButton.setSelected(true);
+            sugarTextField.setEnabled(!noSugarRadioButton.isSelected());
+            
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
