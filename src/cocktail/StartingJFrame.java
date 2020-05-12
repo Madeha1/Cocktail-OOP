@@ -5,15 +5,26 @@
  */
 package cocktail;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
  */
 public class StartingJFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StartingJFrame
-     */
+    Blender blender2;
+    Connection conn = null;
+    ResultSet rs = null;
+    Statement st = null;
+    String url = "jdbc:mysql://localhost:3306/cocktail?useUnicode=true&characterEncoding=UTF-8";//allow charachters
+
     public StartingJFrame() {
         initComponents();
     }
@@ -31,6 +42,8 @@ public class StartingJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel6 = new javax.swing.JLabel();
+        userNameTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -47,7 +60,7 @@ public class StartingJFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Aharoni", 1, 18)); // NOI18N
         jLabel2.setText("Made By :   Madeha Tahboub & Lana Qawasmy");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 580, 405, 27);
+        jLabel2.setBounds(70, 580, 409, 27);
 
         jToggleButton1.setText("Start");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,6 +70,12 @@ public class StartingJFrame extends javax.swing.JFrame {
         });
         getContentPane().add(jToggleButton1);
         jToggleButton1.setBounds(230, 450, 60, 32);
+
+        jLabel6.setText("ID");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(130, 544, 30, 20);
+        getContentPane().add(userNameTextField);
+        userNameTextField.setBounds(180, 540, 190, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cocktail/original.gif"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -69,9 +88,82 @@ public class StartingJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void selectFromBlender(String userName) {
+        try {
+            boolean log = false;
+            rs = st.executeQuery("select * from blender1 where id='" + userName + "'");
+            while (rs.next()) {
+                if (rs.getString(7).equals(userName)) {
+                    log = true;
+                    break;
+                }
+            }
+            if (log == true) {
+                CocktailFrame jframe = new CocktailFrame();
+                int numOfMilk = rs.getInt(5);
+                
+                int numOfSuger = rs.getInt(6);
+                int calory = rs.getInt(9);
+                int red = rs.getInt(10);
+                int green = rs.getInt(11);
+                int blue = rs.getInt(12);
+                ArrayList<Ingredients> ingredients = new ArrayList<>();
+                for (int i = 0; i < jframe.fruitNames.length; i++) {
+                    int num = rs.getInt(i + 2);
+                    ingredients.add(new Fruits(jframe.fruitNames[i], (num * jframe.calArray[i]), (jframe.volumeArray[i] * num), new Color(jframe.colorArray[i][0], jframe.colorArray[i][1], jframe.colorArray[i][2])));
+                }
+                ingredients.add(new Milk("Milk", numOfMilk * jframe.milkCal, numOfMilk * jframe.milkVolume));
+                ingredients.add(new Sugar(numOfSuger * jframe.sugerCal));
+                blender2 = new Blender(rs.getInt(1), rs.getInt(8), ingredients, calory, red, green, blue);
+                CocktailFrame jf = new CocktailFrame();
+                jf.blender = blender2;
+                jf.showIngredientsList();
+                jf.setVisible(true);//link this frame to cocktail and make it visible
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Connection Faild", "Login System", JOptionPane.ERROR_MESSAGE);
+                userNameTextField.setText("");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Login System", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+void load()
+{          try {
+
+      // Load the MySQL JDBC driver
+      Class.forName("com.mysql.cj.jdbc.Driver"); 
+    } catch (Exception e) {
+      System.err.println("Exception: "+e.getMessage());
+    }
+}
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        new CocktailFrame().setVisible(true);//link this frame to cocktail and make it visible
-        this.setVisible(false);
+           String userName = userNameTextField.getText();
+        load();
+        try {
+            boolean log = false;
+            conn = DriverManager.getConnection(url, "root", "");//database URL,userName, password
+            st = (Statement) conn.createStatement();
+            rs = st.executeQuery("select * from user where id='" + userName + "'");
+            while (rs.next()) {
+                if (rs.getString(1).equals(userName)) {
+                    log = true;
+                    break;
+                }
+            }
+            if (log == true)
+             selectFromBlender(userName);   
+             else {
+                JOptionPane.showMessageDialog(this, "Connection Faild", "Login System", JOptionPane.ERROR_MESSAGE);
+                userNameTextField.setText("");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Login System", JOptionPane.ERROR_MESSAGE);
+        }
+
+                                                  
+
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
@@ -115,6 +207,8 @@ public class StartingJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTextField userNameTextField;
     // End of variables declaration//GEN-END:variables
 }

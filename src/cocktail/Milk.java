@@ -8,10 +8,10 @@ public class Milk extends Ingredients{
     public Milk() {
     }
 
-    public Milk(String name, int calories, int volume, Color color) {
+    public Milk(String name, int calories, int volume) {
         super(name, calories);
         this.volume = volume;
-        this.color = color;
+        this.color = new Color(255 , 255 , 255);
     }
 
     @Override

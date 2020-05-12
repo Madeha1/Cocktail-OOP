@@ -18,6 +18,14 @@ public class Blender implements GetInfo , Serializable {
         this.calory = 0;
         ingredients = new ArrayList<>();
     }
+     public Blender (int capacity , int volume ,ArrayList ingredients ,int calory , int r , int g , int b)
+    {
+         this.capacity = capacity;
+        this.volume = volume;
+        this.color = new Color(r, g, b);
+        this.calory = calory;
+        this.ingredients = ingredients;
+    }
    
     public int getCapacity() {
         return capacity;

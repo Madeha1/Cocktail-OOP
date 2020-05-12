@@ -50,8 +50,9 @@ public class CocktailFrame extends javax.swing.JFrame {
     public <E> void saveObj (E object ,String fileName){
         ObjectOutputStream oos =null;
         try {
-            oos = new ObjectOutputStream(new FileOutputStream (fileName));
+            oos = new ObjectOutputStream(new FileOutputStream (fileName));         
             oos.writeObject(object);
+
         } catch (FileNotFoundException ex) {
            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
@@ -793,7 +794,7 @@ public class CocktailFrame extends javax.swing.JFrame {
             int num = getNumber(milkTextField.getText());//this function is to return 0 if the string is empty
             int vol = num * milkVolume;
             if (vol > 0) {
-                blender.add(new Milk("Milk", milkCal * num, vol, new Color(255, 255, 255)));
+                blender.add(new Milk("Milk", milkCal * num, vol));
                 JOptionPane.showMessageDialog(this, "Milk was added successfully!\nThe space remained " + blender.emptyVolume());
                 showIngredientsList();
             } else if (vol < 0) {
@@ -880,13 +881,13 @@ public class CocktailFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        saveObj(blender , "belnder.dat");
-        
+        saveObj(blender , "belnder.dat");               
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         this.blender = loadObj("belnder.dat");
         showIngredientsList();
+        showCupsList();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void showCupsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showCupsButtonActionPerformed
