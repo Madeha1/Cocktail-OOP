@@ -6,10 +6,11 @@ import java.util.ArrayList;
 public class Blender implements GetInfo , Serializable {
 
     private final int capacity;
-    private int volume;
-    ArrayList<Ingredients> ingredients;
-    Color color;
-    int calory;
+    private int volume;//this is the acutal volume of the blender
+    private ArrayList<Ingredients> ingredients;
+    private Color color;
+    private int calory;
+    private int tempVolume;//this volume is to make calculating the color work , it has no relation to the volume of the blender!
     
     public Blender() {
         this.capacity = 2000;//2L always
@@ -18,13 +19,22 @@ public class Blender implements GetInfo , Serializable {
         this.calory = 0;
         ingredients = new ArrayList<>();
     }
-     public Blender (int capacity , int volume ,ArrayList ingredients ,int calory , int r , int g , int b)
+
+    public int getTempVolume() {
+        return tempVolume;
+    }
+
+    public void setTempVolume(int tempVolume) {
+        this.tempVolume = tempVolume;
+    }
+     public Blender (int capacity , int volume ,ArrayList ingredients ,int calory , int r , int g , int b ,int tempVolume)
     {
          this.capacity = capacity;
         this.volume = volume;
         this.color = new Color(r, g, b);
         this.calory = calory;
         this.ingredients = ingredients;
+        this.tempVolume = tempVolume;
     }
    
     public int getCapacity() {
@@ -71,11 +81,12 @@ public class Blender implements GetInfo , Serializable {
         } else //(this.volume + ingredient.getVolume() <= capacity)
         {
             this.volume += ingredient.getVolume();
+            this.tempVolume+= ingredient.getVolume();
             this.ingredients.add(ingredient);
         }
         this.calory = 0;  //If a new ingredient where added after blending or pouring I have to start from 0 
     }
-
+    
     public void blend() throws EmptyBlenderException {
         if (this.volume == 0) {
             throw new EmptyBlenderException();
@@ -89,9 +100,9 @@ public class Blender implements GetInfo , Serializable {
                 this.calory += ing.getCalories();
             }
 
-            this.color.setR(totalRed / this.volume);
-            this.color.setG(totalGreen / this.volume);
-            this.color.setB(totalBlue / this.volume);
+            this.color.setR(totalRed / this.tempVolume);
+            this.color.setG(totalGreen / this.tempVolume);
+            this.color.setB(totalBlue / this.tempVolume);
         }
     }
 
@@ -107,12 +118,14 @@ public class Blender implements GetInfo , Serializable {
             cup.setVolume(volume);
             this.volume = 0;
             this.calory = 0;
+            cup.setColor(this.color);
             ingredients.clear();
         } else {
             cup.setCalories(calory * cup.getCapacity() / this.volume);
             cup.setVolume(cup.getCapacity());
             this.calory = (this.calory - cup.getCalories());
             this.volume -= cup.getCapacity();
+            cup.setColor(this.color);
         }
     }
     public int emptyVolume()
@@ -127,6 +140,7 @@ public class Blender implements GetInfo , Serializable {
         this.color.setB(0);
         this.color.setR(0);
         this.color.setG(0);
+        this.tempVolume = 0;
     }
     @Override
     public String getInfo() {

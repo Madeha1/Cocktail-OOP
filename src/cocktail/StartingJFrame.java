@@ -107,6 +107,7 @@ public class StartingJFrame extends javax.swing.JFrame {
                 int red = rs.getInt(10);
                 int green = rs.getInt(11);
                 int blue = rs.getInt(12);
+                int tempVolume = rs.getInt(13);
                 ArrayList<Ingredients> ingredients = new ArrayList<>();
                 for (int i = 0; i < jframe.fruitNames.length; i++) {
                     int num = rs.getInt(i + 2);
@@ -114,7 +115,7 @@ public class StartingJFrame extends javax.swing.JFrame {
                 }
                 ingredients.add(new Milk("Milk", numOfMilk * jframe.milkCal, numOfMilk * jframe.milkVolume));
                 ingredients.add(new Sugar(numOfSuger * jframe.sugerCal));
-                blender2 = new Blender(rs.getInt(1), rs.getInt(8), ingredients, calory, red, green, blue);
+                blender2 = new Blender(rs.getInt(1), rs.getInt(8), ingredients, calory, red, green, blue , tempVolume);
                 CocktailFrame jf = new CocktailFrame();
                 jf.blender = blender2;
                 jf.showIngredientsList();

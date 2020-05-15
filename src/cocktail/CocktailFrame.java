@@ -157,12 +157,15 @@ public class CocktailFrame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         showCupsButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        colorframe = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         cupsList = new javax.swing.JList<>();
-        jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         cupsInfoArea = new javax.swing.JTextArea();
         exitButton = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -588,6 +591,20 @@ public class CocktailFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Blender", jPanel6);
 
+        jPanel7.setLayout(null);
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cocktail/cup_picture-removebg-preview.png"))); // NOI18N
+        jPanel7.add(jLabel16);
+        jLabel16.setBounds(250, 30, 230, 220);
+
+        colorframe.setOpaque(true);
+        jPanel7.add(colorframe);
+        colorframe.setBounds(300, 88, 100, 110);
+
+        jLabel12.setText("List of the cups :");
+        jPanel7.add(jLabel12);
+        jLabel12.setBounds(42, 11, 80, 14);
+
         cupsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 cupsListValueChanged(evt);
@@ -595,12 +612,16 @@ public class CocktailFrame extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(cupsList);
 
-        jLabel12.setText("List of the cups :");
+        jPanel7.add(jScrollPane3);
+        jScrollPane3.setBounds(34, 31, 152, 245);
 
         cupsInfoArea.setEditable(false);
         cupsInfoArea.setColumns(20);
         cupsInfoArea.setRows(5);
         jScrollPane4.setViewportView(cupsInfoArea);
+
+        jPanel7.add(jScrollPane4);
+        jScrollPane4.setBounds(34, 301, 485, 166);
 
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -608,40 +629,17 @@ public class CocktailFrame extends javax.swing.JFrame {
                 exitButtonActionPerformed(evt);
             }
         });
+        jPanel7.add(exitButton);
+        exitButton.setBounds(3315, 478, 51, 23);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel12)))
-                .addContainerGap(108, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(exitButton)
-                .addGap(28, 28, 28))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exitButton)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
+        jButton8.setText("Drink");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jButton8);
+        jButton8.setBounds(290, 260, 110, 23);
 
         jTabbedPane1.addTab("Cups", jPanel7);
 
@@ -695,11 +693,17 @@ public class CocktailFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    Cups choosenCup = null;
+    
     private void cupsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_cupsListValueChanged
         int index = cupsList.getSelectedIndex();
         if (index != -1) {
-            cupsInfoArea.setText(cupsArray.get(index).getInfo());
+            Cups cup = cupsArray.get(index);
+            choosenCup = cupsArray.get(index);
+            cupsInfoArea.setText(cup.getInfo());
+            Color color= cup.getColor();
+            colorframe.setBackground(new java.awt.Color(color.getR() , color.getG() , color.getB()));
         }
     }//GEN-LAST:event_cupsListValueChanged
 
@@ -830,13 +834,13 @@ public class CocktailFrame extends javax.swing.JFrame {
             for (i = 0; i < numbers.size(); i++) {
                 int vol = numbers.get(i) * volumeArray[i];
                 if (vol > 0) {
-                    blender.add(new Fruits(fruitNames[i], numbers.get(i) * calArray[i], vol, new Color(colorArray[i][0], colorArray[i][1], colorArray[i][2])));
+                    blender.add(new Fruits(fruitNames[i], numbers.get(i) * calArray[i], vol, new Color(colorArray[i][0], colorArray[i][1], colorArray[i][2])));            
                     JOptionPane.showMessageDialog(this, fruitNames[i] + " was added successfully!\nThe space remained " + blender.emptyVolume());
                     showIngredientsList();
                 } else if (vol < 0) {
                     JOptionPane.showMessageDialog(this, "You have entered a negative integer when adding a "+fruitNames[i], "Error", JOptionPane.ERROR_MESSAGE);
                 }
-
+                
             }
 
             //must add blinder exception & parsing
@@ -906,6 +910,11 @@ public class CocktailFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        colorframe.setBackground(jPanel7.getBackground());
+        choosenCup.drink();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
     //if the text field empty replace it with zero
     int getNumber(String textField) {
         if (textField.equals("")) {
@@ -955,6 +964,7 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JTextField appleTextField;
     private javax.swing.JTextField bananaTextField;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel colorframe;
     private javax.swing.JTextArea cupsInfoArea;
     private javax.swing.JList<String> cupsList;
     private javax.swing.JButton exitButton;
@@ -967,6 +977,7 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -974,6 +985,7 @@ public class CocktailFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
