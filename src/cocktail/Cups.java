@@ -55,7 +55,6 @@ public class Cups implements GetInfo{
     {
         this.volume = 0;
         this.calories = 0;
-        this.color = new Color(0,0,0);
     }
 
     @Override
